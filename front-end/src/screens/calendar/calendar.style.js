@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { COLORS } from "../../constants/themes.js";
 
-export const styles = StyleSheet.create({
+/*export const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.gray5,
     padding: 20,
@@ -37,3 +37,19 @@ export const styles = StyleSheet.create({
     color: COLORS.orange,
   },
 });
+*/
+
+export const styles = {
+  container: {
+    backgroundColor: COLORS.gray5,
+    padding: 20,
+    justifyContent: "space-between",
+    flexGrow: 1,
+  },
+  text: {
+    fontSize: FONT_SIZE.md,
+    color: COLORS.gray1,
+    marginBottom: 15,
+    marginLeft: 10,
+  },
+};
