@@ -3,8 +3,6 @@ import { COLORS, FONT_SIZE } from "../../constants/themes.js";
 
 export const styles = StyleSheet.create({
   btn: {
-    width: "100%",
-
     borderRadius: 10,
     padding: 12,
     // Sombras para iOS
@@ -20,11 +18,11 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.orange,
   },
   danger: {
-    backgroundColor: "red",
+    backgroundColor: COLORS.danger,
   },
   text: {
-    color: COLORS.gray5,
-    fontSize: FONT_SIZE.md,
+    color: COLORS.gray4,
+    fontSize: FONT_SIZE.sm,
     textAlign: "center",
   },
 });

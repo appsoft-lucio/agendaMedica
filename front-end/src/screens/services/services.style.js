@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 5,
   },
-  speciality: {
+  specialty: {
     fontSize: FONT_SIZE.md,
     color: COLORS.gray4,
     marginTop: 5,

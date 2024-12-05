@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "../../constants/themes.js";
+import { COLORS, FONT_SIZE } from "../../constants/themes.js";
 
-/*export const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.gray5,
     padding: 20,
@@ -15,6 +15,7 @@ import { COLORS } from "../../constants/themes.js";
     width: 270,
     height: 60,
   },
+  text: { fontSize: FONT_SIZE.lg, marginBottom: 15, fontWeight: "bold" },
   containerInput: {
     marginBottom: 15,
   },
@@ -37,19 +38,3 @@ import { COLORS } from "../../constants/themes.js";
     color: COLORS.orange,
   },
 });
-*/
-
-export const styles = {
-  container: {
-    backgroundColor: COLORS.gray5,
-    padding: 20,
-    justifyContent: "space-between",
-    flexGrow: 1,
-  },
-  text: {
-    fontSize: FONT_SIZE.md,
-    color: COLORS.gray1,
-    marginBottom: 15,
-    marginLeft: 10,
-  },
-};

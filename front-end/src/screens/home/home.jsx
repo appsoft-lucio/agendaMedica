@@ -3,9 +3,17 @@ import { FlatList, Text, View } from "react-native";
 import { styles } from "./home.style.js";
 import { doctors } from "../../constants/data.js";
 import Doctor from "../../components/doctor/doctor.jsx";
-import icon from "../../constants/icon.js";
 
-function Home() {
+function Home(props) {
+  function ClickDoctor(id_doctor, name, specialty, icon) {
+    props.navigation.navigate("Services", {
+      id_doctor,
+      name,
+      specialty,
+      icon,
+    });
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Agende seus serviços.</Text>
@@ -15,9 +23,11 @@ function Home() {
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <Doctor
+            id_doctor={item.id_doctor}
             name={item.name}
-            icon={item.icon == "M" ? icon.male : icon.female}
+            icon={item.icon}
             specialty={item.specialty}
+            onPress={ClickDoctor}
           />
         )}
       />
