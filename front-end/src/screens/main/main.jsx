@@ -1,14 +1,10 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
 import icon from "../../constants/icon.js";
-
 import Home from "../home/home.jsx";
 import Calendar from "../calendar/calendar.jsx";
 import Profile from "../profile/profile.jsx";
 import { Image } from "react-native";
-import { COLORS } from "../../constants/themes.js";
 
 const Tab = createBottomTabNavigator();
 

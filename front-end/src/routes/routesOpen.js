@@ -13,7 +13,7 @@ function RoutesOpen() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="account"
+        name="Account"
         component={Account}
         options={{ headerShown: false }}
       />

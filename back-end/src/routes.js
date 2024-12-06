@@ -23,7 +23,7 @@ router.get(
 );
 
 //Users...
-router.post("/users/registrar", controllerUser.Inserir);
+router.post("/users/register", controllerUser.Inserir);
 router.post("/users/login", controllerUser.Login);
 router.get("/users/profile", jwt.ValidateToken, controllerUser.Profile);
 

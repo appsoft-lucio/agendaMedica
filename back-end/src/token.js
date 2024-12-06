@@ -3,12 +3,15 @@ import jwt from "jsonwebtoken";
 const secretToken = "agendaMobile";
 
 function CreateToken(id_user) {
-  const token = jwt.sign({ id_user }, secretToken, { expiresIn: 999999 });
+  const token = jwt.sign({ id_user }, secretToken, {
+    expiresIn: 999999,
+  });
+
   return token;
 }
 
 function ValidateToken(req, res, next) {
-  const authToken = req.headers["authorization"]; // Captura o header de autorização
+  const authToken = req.headers.authorization; // Captura o header de autorização
 
   if (!authToken) {
     return res.status(401).json({ error: "Token não informado" });

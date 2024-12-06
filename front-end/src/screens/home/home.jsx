@@ -1,10 +1,12 @@
-import React from "react";
-import { FlatList, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Alert, FlatList, Text, View } from "react-native";
 import { styles } from "./home.style.js";
-import { doctors } from "../../constants/data.js";
 import Doctor from "../../components/doctor/doctor.jsx";
+import api from "../../constants/api.js";
 
 function Home(props) {
+  const [doctors, setDoctors] = useState([]);
+
   function ClickDoctor(id_doctor, name, specialty, icon) {
     props.navigation.navigate("Services", {
       id_doctor,
@@ -13,6 +15,20 @@ function Home(props) {
       icon,
     });
   }
+
+  async function LoadDoctors() {
+    try {
+      const response = await api.get("/doctors");
+      if (response.data) setDoctors(response.data);
+    } catch (error) {
+      if (error.response?.data.error) Alert.alert(error.response.data.error);
+      else Alert.alert("Aconteceu um erro no login. Tente mais tarde");
+    }
+  }
+
+  useEffect(() => {
+    LoadDoctors();
+  }, []);
 
   return (
     <View style={styles.container}>
