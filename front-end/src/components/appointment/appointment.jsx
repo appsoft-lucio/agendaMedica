@@ -16,11 +16,11 @@ function Appointment(props) {
       <View style={styles.container}>
         <View style={styles.containerBooking}>
           <View style={styles.booking}>
-            <Image style={styles.icon} source={icon.calendar} />
+            <Image style={styles.icon} source={icon.calendar_orange} />
             <Text style={styles.bookingDate}>{dt.toLocaleDateString()}</Text>
           </View>
           <View style={styles.booking}>
-            <Image style={styles.icon} source={icon.clock} />
+            <Image style={styles.icon} source={icon.clock_orange} />
             <Text style={styles.bookingHour}>{props.booking_hour}</Text>
           </View>
         </View>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Image, TextInput, View, Text, TouchableOpacity } from "react-native";
 import icon from "../../constants/icon.js";
-import { styles } from "./accoun.js";
+import { styles } from "./accoun.style.js";
 import Button from "../../components/button/button.jsx";
 
 function Account(props) {

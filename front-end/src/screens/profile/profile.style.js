@@ -3,9 +3,10 @@ import { COLORS, FONT_SIZE } from "../../constants/themes.js";
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.w,
-    padding: 12,
     flex: 1,
+    justifyContent: "space-between",
+    backgroundColor: COLORS.gray5,
+    padding: 12,
   },
   item: {
     backgroundColor: COLORS.white,
@@ -34,4 +35,8 @@ export const styles = StyleSheet.create({
     fontSize: FONT_SIZE.md,
     color: COLORS.gray1,
   },
+  containerBtn: {
+    marginTop: 25,
+  },
+  btn: {},
 });

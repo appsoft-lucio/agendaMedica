@@ -14,11 +14,11 @@ export default function Main() {
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: COLORS.orange, // Cor ativa (selecionada) das abas
-        tabBarInactiveTintColor: "gray", // Cor inativa (não selecionada) das abas
+        tabBarInactiveTintColor: COLORS.gray5, // Cor inativa (não selecionada) das abas
       }}
+      sceneContainerStyle={{ flex: 1 }} // Garantir que os filhos ocupem toda a tela
     >
       <Tab.Screen
-        style={{ color: COLORS.orange }}
         name="Home"
         component={Home}
         options={{
@@ -29,7 +29,7 @@ export default function Main() {
             );
           },
           tabBarShowLabel: true,
-          unmountOnBlr: true,
+          unmountOnBlur: true,
           tabBarIcon: ({ focused }) => {
             return (
               <Image
@@ -51,7 +51,7 @@ export default function Main() {
             );
           },
           tabBarShowLabel: true,
-          unmountOnBlr: true,
+          unmountOnBlur: true,
           tabBarIcon: ({ focused }) => {
             return (
               <Image
@@ -73,7 +73,7 @@ export default function Main() {
             );
           },
           tabBarShowLabel: true,
-          unmountOnBlr: true,
+          unmountOnBlur: true,
           tabBarIcon: ({ focused }) => {
             return (
               <Image

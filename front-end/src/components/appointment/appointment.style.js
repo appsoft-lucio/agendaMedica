@@ -38,6 +38,7 @@ export const styles = StyleSheet.create({
     width: 35,
     height: 35,
     marginRight: 8,
+    marginBottom: 8,
   },
   bookingDate: {
     fontSize: FONT_SIZE.sm,
