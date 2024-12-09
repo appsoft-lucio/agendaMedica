@@ -3,9 +3,10 @@ import { View, Text, Image } from "react-native";
 import { styles } from "./appointment.style.js";
 import icon from "../../constants/icon.js";
 import Button from "../../components/button/button.jsx";
-import { appointments } from "../../constants/data.js";
 
 function Appointment(props) {
+  const dt = new Date(props.booking_date + "T" + props.booking_hour);
+
   return (
     <View style={styles.appointment}>
       <Text style={styles.name}>
@@ -16,7 +17,7 @@ function Appointment(props) {
         <View style={styles.containerBooking}>
           <View style={styles.booking}>
             <Image style={styles.icon} source={icon.calendar} />
-            <Text style={styles.bookingDate}>15/10/2024</Text>
+            <Text style={styles.bookingDate}>{dt.toLocaleDateString()}</Text>
           </View>
           <View style={styles.booking}>
             <Image style={styles.icon} source={icon.clock} />

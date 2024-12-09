@@ -29,6 +29,7 @@ export default function Main() {
             );
           },
           tabBarShowLabel: true,
+          unmountOnBlr: true,
           tabBarIcon: ({ focused }) => {
             return (
               <Image
@@ -50,6 +51,7 @@ export default function Main() {
             );
           },
           tabBarShowLabel: true,
+          unmountOnBlr: true,
           tabBarIcon: ({ focused }) => {
             return (
               <Image
@@ -71,6 +73,7 @@ export default function Main() {
             );
           },
           tabBarShowLabel: true,
+          unmountOnBlr: true,
           tabBarIcon: ({ focused }) => {
             return (
               <Image
