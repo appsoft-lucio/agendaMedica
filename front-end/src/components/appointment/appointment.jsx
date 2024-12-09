@@ -21,7 +21,7 @@ function Appointment(props) {
           </View>
           <View style={styles.booking}>
             <Image style={styles.icon} source={icon.clock} />
-            <Text style={styles.bookingHour}>10:00</Text>
+            <Text style={styles.bookingHour}>{props.booking_hour}</Text>
           </View>
         </View>
 
