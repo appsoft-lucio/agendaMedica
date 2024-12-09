@@ -1,19 +1,19 @@
-import home from "../assets/home.png";
-import calendar from "../assets/calendar.png";
-import profile from "../assets/profile.png";
+import home_orange from "../assets/home_orange.png";
+import calendar_orange from "../assets/calendar_orange.png";
+import profile_orange from "../assets/profile_orange.png";
 import logo from "../assets/logo.png";
 import logoxxl from "../assets/logoxxl.png";
 import male from "../assets/male.png";
 import female from "../assets/female.png";
-import clock from "../assets/clock.png";
+import clock_orange from "../assets/clock_orange.png";
 
 export default {
-  home,
-  calendar,
-  profile,
+  home_orange,
+  calendar_orange,
+  profile_orange,
   logo,
   logoxxl,
   male,
   female,
-  clock,
+  clock_orange,
 };

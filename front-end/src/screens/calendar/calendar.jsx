@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Alert, FlatList, Text, View, useIsFocused } from "react-native";
+import { Alert, FlatList, Text, View } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
 import { styles } from "./calendar.style.js";
 import Appointment from "../../components/appointment/appointment.jsx";
 import api from "../../constants/api.js";
