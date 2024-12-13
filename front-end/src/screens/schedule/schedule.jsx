@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Alert, Text, View } from "react-native";
 import { Styles } from "./schedule.style";
 import { Calendar, LocaleConfig } from "react-native-calendars";
@@ -16,6 +16,45 @@ export default function Schedule(props) {
 
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedHour, setSelectedHour] = useState("");
+  const [reservedHours, setReservedHours] = useState([]); // Horários reservados
+
+  // Gera horários de 15 em 15 minutos entre 7h e 18h
+  const generateHours = () => {
+    const hours = [];
+    for (let hour = 7; hour < 18; hour++) {
+      for (let minutes = 0; minutes < 60; minutes += 15) {
+        hours.push(
+          `${hour.toString().padStart(2, "0")}:${minutes
+            .toString()
+            .padStart(2, "0")}`
+        );
+      }
+    }
+    return hours;
+  };
+
+  // Filtra horários disponíveis (bloqueia 30 minutos após horários reservados)
+  const getAvailableHours = () => {
+    const allHours = generateHours(); // Lista de todos os horários possíveis
+    const blockedHours = new Set();
+
+    // Bloqueia horário reservado e adiciona um bloqueio de 30 minutos após ele
+    reservedHours.forEach((reserved) => {
+      blockedHours.add(reserved);
+
+      const [hour, minutes] = reserved.split(":").map(Number);
+      const nextHour = new Date(0, 0, 0, hour, minutes + 30); // Calcula horário após 30 minutos
+      blockedHours.add(
+        `${nextHour.getHours().toString().padStart(2, "0")}:${nextHour
+          .getMinutes()
+          .toString()
+          .padStart(2, "0")}`
+      );
+    });
+
+    // Retorna apenas horários disponíveis
+    return allHours.filter((hour) => !blockedHours.has(hour));
+  };
 
   async function ClickBooking() {
     try {
@@ -43,6 +82,24 @@ export default function Schedule(props) {
     }
   }
 
+  // Carrega horários reservados da API
+  async function LoadReservedHours(date) {
+    try {
+      const response = await api.get(`/appointments/${id_doctor}/${date}`);
+      // Define os horários reservados
+      setReservedHours(response.data.map((appt) => appt.booking_hour));
+    } catch {
+      Alert.alert("Erro ao carregar horários reservados.");
+    }
+  }
+
+  // Atualiza os horários reservados quando a data é alterada
+  useEffect(() => {
+    if (selectedDate) {
+      LoadReservedHours(selectedDate); // Busca horários ocupados da API
+    }
+  }, [selectedDate]);
+
   return (
     <View style={Styles.container}>
       <View>
@@ -67,9 +124,9 @@ export default function Schedule(props) {
               setSelectedHour(itemValue);
             }}
           >
-            <Picker.Item label="08:00" value="08:00" />
-            <Picker.Item label="09:00" value="09:00" />
-            <Picker.Item label="10:00" value="10:00" />
+            {generateHours().map((hour) => (
+              <Picker.Item key={hour} label={hour} value={hour} />
+            ))}
           </Picker>
         </View>
       </View>
