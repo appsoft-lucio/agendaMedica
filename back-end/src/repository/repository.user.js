@@ -4,7 +4,6 @@ async function ListarByEmail(email) {
   const sqlSelect = `SELECT * FROM users WHERE email = ?`;
   const user = await query(sqlSelect, [email]);
 
-  console.log("Usuário encontrado no banco:", user); // Log do usuário encontrado
   return user[0] || null; // Retorna o usuário ou null se não encontrado
 }
 
