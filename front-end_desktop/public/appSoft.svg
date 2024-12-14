@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="200" height="100">
+<text font-size="70">&lt;</text>
+  <text x="10" y="40" font-family="Arial, sans-serif" font-size="32" fill="orange">
+    App
+  </text>
+  <text font-size="70">/&gt;</text>
+  <text x="10" y="80" font-family="Arial, sans-serif" font-size="28" fill="orange">
+    Soft
+  </text>
+</svg>
