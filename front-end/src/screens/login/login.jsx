@@ -19,6 +19,7 @@ function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   async function ExecuteLogin() {
     if (!email || !password) {
@@ -63,11 +64,17 @@ function Login(props) {
 
         <View style={styles.containerInput}>
           <TextInput
-            placeholder="Digite sua senha"
+            placeholder="Senha"
             style={styles.input}
-            secureTextEntry={true}
+            secureTextEntry={!showPassword} // Alterna visibilidade
             onChangeText={(texto) => setPassword(texto)}
           />
+          <TouchableOpacity
+            style={styles.showPasswordButton}
+            onPress={() => setShowPassword(!showPassword)}
+          >
+            <Text>{showPassword ? "Ocultar" : "Mostrar"}</Text>
+          </TouchableOpacity>
         </View>
 
         <Button

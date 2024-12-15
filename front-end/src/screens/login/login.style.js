@@ -18,6 +18,13 @@ export const styles = StyleSheet.create({
   containerInput: {
     marginBottom: 15,
   },
+  showPasswordButton: {
+    position: "absolute",
+    right: 10, // Distância da borda direita
+    top: "50%", // Centralizado verticalmente
+    transform: [{ translateY: -10 }], // Ajuste para centralizar
+    padding: 5,
+  },
   input: {
     backgroundColor: COLORS.gray4,
     padding: 15,
