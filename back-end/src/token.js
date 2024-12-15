@@ -1,10 +1,10 @@
 import jwt from "jsonwebtoken";
 
-const secretToken = "agendaMobile";
+const secretToken = process.env.JWT_SECRET || "defaultSecret"; // Valor padrão em caso de ausência
 
 function CreateToken(id_user) {
   const token = jwt.sign({ id_user }, secretToken, {
-    expiresIn: 999999,
+    expiresIn: "1d", // ou "2h" para duas horas
   });
 
   return token;
@@ -13,8 +13,8 @@ function CreateToken(id_user) {
 function ValidateToken(req, res, next) {
   const authToken = req.headers.authorization; // Captura o header de autorização
 
-  if (!authToken) {
-    return res.status(401).json({ error: "Token não informado" });
+  if (!authToken || typeof authToken !== "string") {
+    return res.status(401).json({ error: "Token não informado ou inválido" });
   }
 
   const [bearer, token] = authToken.split(" ");
@@ -25,6 +25,12 @@ function ValidateToken(req, res, next) {
   jwt.verify(token, secretToken, (err, tokenDecoded) => {
     if (err) {
       return res.status(401).json({ error: "Token inválido" });
+    }
+
+    if (!tokenDecoded.id_user) {
+      return res
+        .status(401)
+        .json({ error: "ID do usuário não fornecido ou inválido" });
     }
 
     req.id_user = tokenDecoded.id_user; // Define o ID do usuário no request

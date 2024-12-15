@@ -39,7 +39,7 @@ async function Login(email, password) {
   if (await bcrypt.compare(password, user.password)) {
     const token = jwt.CreateToken(user.id_user);
     delete user.password;
-    //user.token = token;
+    user.token = token;
     return user;
   } else {
     return [];
