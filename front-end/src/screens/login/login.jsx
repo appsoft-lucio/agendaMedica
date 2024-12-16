@@ -73,7 +73,10 @@ function Login(props) {
             style={styles.showPasswordButton}
             onPress={() => setShowPassword(!showPassword)}
           >
-            <Text>{showPassword ? "Ocultar" : "Mostrar"}</Text>
+            <Image
+              source={showPassword ? icon.olho : icon.olho_fechado}
+              style={styles.olhoIcon} // Certifique-se de definir um estilo adequado
+            />
           </TouchableOpacity>
         </View>
 

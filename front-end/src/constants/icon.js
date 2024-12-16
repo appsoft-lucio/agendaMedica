@@ -6,6 +6,8 @@ import logoxxl from "../assets/logoxxl.png";
 import male from "../assets/male.png";
 import female from "../assets/female.png";
 import clock_orange from "../assets/clock_orange.png";
+import olho from "../assets/olho.png";
+import olho_fechado from "../assets/olho_fechado.png";
 
 export default {
   home_orange,
@@ -16,4 +18,6 @@ export default {
   male,
   female,
   clock_orange,
+  olho,
+  olho_fechado,
 };

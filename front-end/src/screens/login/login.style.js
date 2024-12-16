@@ -25,6 +25,11 @@ export const styles = StyleSheet.create({
     transform: [{ translateY: -10 }], // Ajuste para centralizar
     padding: 5,
   },
+  olhoIcon: {
+    width: 24,
+    height: 24,
+    tintColor: COLORS.gray1, // Opcional, para ajustar a cor do ícone
+  },
   input: {
     backgroundColor: COLORS.gray4,
     padding: 15,
