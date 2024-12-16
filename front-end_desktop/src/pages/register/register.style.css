@@ -1,0 +1,52 @@
+.form-signin {
+  width: 500px;
+  padding: 15px;
+  background-color: #f1f5f4;
+  box-shadow: 3px 3px 1px #a0a0a0;
+  border-radius: 10px;
+}
+
+.background-login {
+  object-fit: cover;
+  width: 105%;
+  height: 100vh;
+  object-position: left;
+}
+
+.logo {
+  width: 160px;
+}
+
+input {
+  box-shadow: 2px 2px 1px #a0a0a0;
+  border-radius: 3px;
+  border: none;
+  width: 90%;
+  font-size: large;
+  padding: 5px;
+}
+
+input:focus {
+  border-color: #ff6600; /* Cor da borda laranja */
+  box-shadow: 0 0 10px #ff6600; /* Destaque com sombra laranja */
+  outline: none; /* Remove o outline padrão */
+}
+
+.eye-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: -22px; /* Ajusta o posicionamento */
+}
+
+.btn-custom {
+  width: 90%;
+  background-color: #ff6600; /* Cor de fundo laranja */
+  border-color: #ff6600; /* Cor da borda laranja */
+  color: white; /* Cor do texto */
+  transition: background-color 0.3s, border-color 0.3s; /* Transição suave */
+}
+
+.btn-custom:hover {
+  background-color: #ff6600; /* Cor de fundo ao passar o mouse */
+  border-color: #ff6600; /* Cor da borda ao passar o mouse */
+}
