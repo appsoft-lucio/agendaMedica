@@ -75,7 +75,7 @@ function Login(props) {
           >
             <Image
               source={showPassword ? icon.olho : icon.olho_fechado}
-              style={styles.olhoIcon} // Certifique-se de definir um estilo adequado
+              style={styles.olhoIcon}
             />
           </TouchableOpacity>
         </View>

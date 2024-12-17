@@ -28,13 +28,13 @@ export const styles = StyleSheet.create({
   olhoIcon: {
     width: 24,
     height: 24,
-    tintColor: COLORS.gray1, // Opcional, para ajustar a cor do ícone
+    tintColor: COLORS.gray1,
   },
   input: {
     backgroundColor: COLORS.gray4,
     padding: 15,
     borderRadius: 10,
-    shadowColor: "#000",
+    shadowColor: COLORS.gray1,
     shadowOffset: { width: 3, height: 3 },
     shadowOpacity: 0.2,
     shadowRadius: 5,

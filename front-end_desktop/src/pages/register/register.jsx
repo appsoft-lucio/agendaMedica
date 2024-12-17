@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./register.style.css";
 import logo from "../../assets/logo.png";
 import fundo from "../../assets/fundo.png";
@@ -8,6 +8,11 @@ import olhoFechado from "../../assets/olhoFechado.png";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
+  function CriarConta() {
+    navigate("/");
+  }
 
   return (
     <div className="row login-container">
@@ -49,7 +54,13 @@ export default function Register() {
             />
           </div>
           <div className="mt-3">
-            <button className="btn btn-custom">Criar minha conta.</button>
+            <button
+              onClick={CriarConta}
+              className="btn btn-custom"
+              type="button"
+            >
+              Criar minha conta.
+            </button>
           </div>
           <div className="mt-5 mb-3">
             <span>Já tenho conta. </span>

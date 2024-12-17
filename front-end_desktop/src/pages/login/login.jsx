@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./login.style.css";
 import logo from "../../assets/logo.png";
@@ -8,7 +9,11 @@ import olhoFechado from "../../assets/olhoFechado.png";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
+  function ExecuteLogin() {
+    navigate("/appointments");
+  }
   return (
     <div className="row login-container">
       <article className="col-sm-5 d-flex justify-content-center align-items-center text-center">
@@ -35,7 +40,9 @@ export default function Login() {
             />
           </div>
           <div className="mt-3">
-            <button className="btn btn-custom">Acessar</button>
+            <button onClick={ExecuteLogin} className="btn btn-custom">
+              Acessar
+            </button>
           </div>
           <div className="mt-5 mb-3">
             <span>Não tenho conta. </span>
