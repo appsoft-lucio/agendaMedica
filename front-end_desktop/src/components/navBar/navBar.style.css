@@ -1,3 +1,55 @@
+:root {
+  --orange: #ff6600;
+  --transparentOrange: rgba(255, 102, 0, 0.8);
+  --danger: #ff0000;
+  --blue: #0d6efd;
+  --vibrantBlue: #00ccff;
+  --darkGray: #333333;
+  --white: #ffffff;
+
+  --gray1: #323434;
+  --gray2: #717f7f;
+  --gray3: #a0a0a0;
+  --gray4: #e4e4e4;
+  --gray5: #f1f5f4;
+}
+
+/* Cor personalizada para o fundo da navbar */
+.navBarColor {
+  background-color: var(
+    --orange
+  ) !important; /* Cor laranja ou qualquer outra que você preferir */
+}
+
 .logo-menu {
-  height: 35px;
+  width: 100px;
+  margin-left: 50px;
+  margin-right: 100px;
+}
+
+/* Garantir que o texto da navbar seja branco */
+.navbar-nav .nav-link,
+.navbar-nav {
+  color: var(--gray4) !important; /* Força a cor do texto a ser branca */
+}
+
+/* Mudando a cor ao passar o mouse */
+.navbar-nav .nav-link:hover {
+  color: var(--gray2) !important; /* Cor mais clara quando o mouse passa */
+}
+
+/* Estilos para o botão "Lúcio Júnior" */
+.btn-secondary {
+  background-color: var(--gray5); /* Fundo cinza claro */
+  border-color: var(--gray5); /* Borda cinza claro */
+  color: var(--gray3); /* Texto preto */
+  font-size: 14px;
+  transition: all 0.5s ease; /* Transição suave ao hover */
+}
+
+/* Estilos no hover */
+.btn-secondary:hover {
+  background-color: #c9d1ce; /* Versão mais escura de gray5 */
+  border-color: #c9d1ce; /* Borda combinando com o fundo */
+  color: var(--gray1); /* Texto preto no hover */
 }

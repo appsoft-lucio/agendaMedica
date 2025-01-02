@@ -5,3 +5,27 @@ body {
   font-family: "Poppins";
   overflow-x: hidden;
 }
+
+.mt-page {
+  margin-top: 70px;
+}
+
+.btn-custom {
+  /* width: 90%; */
+  background-color: #ff6600; /* Cor de fundo laranja */
+  border-color: #ff6600; /* Cor da borda laranja */
+  color: white; /* Cor do texto */
+  transition: background-color 0.3s, border-color 0.3s; /* Transição suave */
+}
+
+.btn-custom:hover {
+  background-color: #ff6600; /* Cor de fundo ao passar o mouse */
+  border-color: #ff6600; /* Cor da borda ao passar o mouse */
+}
+
+select {
+  border: 0;
+  background-color: white;
+  cursor: pointer;
+  width: 100%;
+}
