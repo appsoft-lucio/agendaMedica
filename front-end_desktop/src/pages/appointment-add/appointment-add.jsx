@@ -1,15 +1,18 @@
 import NavBar from "../../components/navBar/navBar.jsx";
 import { doctors, doctors_services } from "../../constants/data.js";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function AppointmentAdd() {
+  const { id_appointment } = useParams();
   return (
     <>
       <NavBar />
       <section className="container-fluid mt-page ">
         <section className="row col-lg-4 offset-lg-4">
           <section className="col-12 mt-2">
-            <h2>Novo Agendamento</h2>
+            <h2>
+              {id_appointment > 0 ? "Editar agendamento" : "Novo Agendamento"}
+            </h2>
           </section>
           <section className="col-12 mt-3">
             <label htmlFor="doctor" className="form-label ">
