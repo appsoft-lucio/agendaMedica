@@ -10,6 +10,8 @@ import olhoFechado from "../../assets/olhoFechado.png";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function ExecuteLogin() {
     navigate("/appointments");
@@ -24,12 +26,17 @@ export default function Login() {
           </h4>
           <h5 className="mb-2 text-secondary">Acesse sua conta.</h5>
           <div className="mt-4">
-            <input type="email" placeholder="E-mail" />
+            <input
+              type="email"
+              placeholder="E-mail"
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <div className="mt-3 ">
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Senha"
+              onChange={(e) => setPassword(e.target.value)}
             />
             <img
               src={showPassword ? olhoAberto : olhoFechado}
