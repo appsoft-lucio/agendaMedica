@@ -11,47 +11,11 @@ import api from "../../constants/api.js";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [alert, setalert] = useState("");
 
-  async function ExecuteLogin(e) {
-    e.preventDefault();
+  async function ExecuteLogin() {
     setalert("");
-    try {
-      const response = await api.post("/admin/login", { email, password });
-
-      if (response.data) {
-        localStorage.setItem("sessionToken", response.data.token);
-        localStorage.setItem("sessionId", response.data.id_admin);
-        localStorage.setItem("sessionEmail", response.data.email);
-        localStorage.setItem("sessionName", response.data.name);
-        api.defaults.headers.common["Authorization"] =
-          "Bearer " + response.data.token;
-        navigate("/appointments");
-        try {
-          if (response.data) {
-            console.log(response.data);
-          } else {
-            console.log(response);
-          }
-        } catch (error) {
-          alert("Erro ao efetuar login. Tente novamente.");
-          console.log(error);
-        }
-      } else {
-        setalert("Erro ao efeutar login. Tente novamente");
-        console.log("Erro ao efeutar login. Tente novamente");
-      }
-    } catch (error) {
-      if (error.response?.data.error) {
-        setalert(error.response?.data.error);
-      } else {
-        setalert("Erro ao efeutar login. Tente novamente");
-      }
-      console.log(error);
-    }
-    console.log(password, email);
+    navigate("/appointments");
   }
   return (
     <div className="row login-container">
