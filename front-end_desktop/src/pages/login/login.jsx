@@ -6,6 +6,7 @@ import logo from "../../assets/logo.png";
 import fundo from "../../assets/fundo.png";
 import olhoAberto from "../../assets/olhoAberto.png";
 import olhoFechado from "../../assets/olhoFechado.png";
+import api from "../../constants/api";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,8 +14,22 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function ExecuteLogin() {
-    navigate("/appointments");
+  async function ExecuteLogin() {
+    e.preventDefault();
+    const response = await api.get("/user/login", { email, password });
+
+    try {
+      if (response.data) {
+        console.log(response.data);
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      alert("Erro ao efetuar login. Tente novamente.");
+      console.log(error);
+    }
+
+    // navigate("/appointments");
   }
   return (
     <div className="row login-container">
@@ -30,6 +45,7 @@ export default function Login() {
               type="email"
               placeholder="E-mail"
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="username"
             />
           </div>
           <div className="mt-3 ">
@@ -37,6 +53,7 @@ export default function Login() {
               type={showPassword ? "text" : "password"}
               placeholder="Senha"
               onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
             />
             <img
               src={showPassword ? olhoAberto : olhoFechado}
