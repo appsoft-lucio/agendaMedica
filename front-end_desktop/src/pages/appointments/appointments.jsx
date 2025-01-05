@@ -1,16 +1,57 @@
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../components/navBar/navBar";
-import { doctors, appointments } from "../../constants/data.js";
+import { doctors } from "../../constants/data.js";
 import Appointment from "../../components/appointments/appointments.jsx";
+import { useEffect, useState } from "react";
+import api from "../../constants/api.js";
 
 export default function Appointments() {
   const navigate = useNavigate();
+  const [appointments, setAppointments] = useState([]);
+
   function ClickEdit(id_appointment) {
     navigate("/appointments/edit/" + id_appointment);
   }
+
   function ClickDelete(id_appointment) {
     return console.log("Deletar" + id_appointment);
   }
+
+  async function LoadAppointments() {
+    try {
+      const token = localStorage.getItem("sessionToken"); // Recupera o token do localStorage
+
+      if (!token) {
+        alert("Você precisa estar logado para acessar esta página.");
+        navigate("/"); // Redireciona para o login
+        return;
+      }
+
+      const response = await api.get("/appointments", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho
+        },
+      });
+
+      if (response.data) {
+        setAppointments(response.data);
+        console.log("Dados carregados:", response.data);
+      }
+    } catch (error) {
+      if (error.response?.status === 401) {
+        alert("Sessão expirada. Faça login novamente.");
+        localStorage.clear();
+        navigate("/"); // Redireciona para o login
+      } else {
+        alert("Erro ao carregar agendamentos. Tente novamente.");
+      }
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    LoadAppointments();
+  }, []);
 
   return (
     <section className="container-fluid mt-page">

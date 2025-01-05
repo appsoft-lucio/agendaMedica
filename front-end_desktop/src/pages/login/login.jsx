@@ -6,30 +6,55 @@ import logo from "../../assets/logo.png";
 import fundo from "../../assets/fundo.png";
 import olhoAberto from "../../assets/olhoAberto.png";
 import olhoFechado from "../../assets/olhoFechado.png";
-import api from "../../constants/api";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [alert, setalert] = useState("");
 
-  async function ExecuteLogin() {
+  async function ExecuteLogin(e) {
     e.preventDefault();
-    const response = await api.get("/user/login", { email, password });
-
+    setalert("");
     try {
+      const response = await api.post("/users/login", { email, password });
+
       if (response.data) {
-        console.log(response.data);
+        localStorage.setItem("sessionToken", response.data.token);
+        localStorage.setItem("sessionId", response.data.id_user);
+        localStorage.setItem("sessionEmail", response.data.email);
+        localStorage.setItem("sessionName", response.data.name);
+        api.defaults.headers.common["Authorization"] =
+          "Bearer" + response.data.token;
+        e.preventDefault();
+        const response = await api.get("/user/login", { email, password });
+
+        try {
+          if (response.data) {
+            console.log(response.data);
+          } else {
+            console.log(response);
+          }
+        } catch (error) {
+          alert("Erro ao efetuar login. Tente novamente.");
+          console.log(error);
+        }
+
+        // navigate("/appointments");
       } else {
-        console.log(response);
+        setalert("Erro ao efeutar login. Tente novamente");
+        console.log("Erro ao efeutar login. Tente novamente");
       }
     } catch (error) {
-      alert("Erro ao efetuar login. Tente novamente.");
+      if (error.response?.data.error) {
+        setalert(error.response?.data.error);
+      } else {
+        setalert("Erro ao efeutar login. Tente novamente");
+      }
       console.log(error);
     }
-
-    // navigate("/appointments");
+    console.log(password, email);
   }
   return (
     <div className="row login-container">
@@ -64,10 +89,15 @@ export default function Login() {
             />
           </div>
           <div className="mt-3">
-            <button onClick={ExecuteLogin} className="btn btn-custom">
+            <button onClick={ExecuteLogin} className="btn btn-custom mb-3">
               Acessar
             </button>
           </div>
+          {alert.length > 0 ? (
+            <div className="alert alert-danger" role="alert">
+              {alert}
+            </div>
+          ) : null}
           <div className="mt-5 mb-3">
             <span>Não tenho conta. </span>
             <Link to="/register">Criar conta.</Link>
