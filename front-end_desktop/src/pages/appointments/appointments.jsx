@@ -1,6 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import "./appointments.style.css";
 import NavBar from "../../components/navBar/navBar";
+import { Link, useNavigate } from "react-router-dom";
 import { doctors } from "../../constants/data.js";
+// import AppointmentAdd from "../appointment-add/appointment-add.jsx";
 import Appointment from "../../components/appointments/appointments.jsx";
 import { useEffect, useState } from "react";
 import api from "../../constants/api.js";
@@ -70,6 +72,7 @@ export default function Appointments() {
           <section className="form-control ms-2 me-2">
             <select id="doctor" name="doctor">
               <option value="">Todos os médicos</option>
+
               {doctors.map((doc) => {
                 return (
                   <option key={doc.id_doctor} value={doc.id_doctor}>
@@ -79,9 +82,11 @@ export default function Appointments() {
               })}
             </select>
           </section>
+
           <button className="btn btn-custom">Filtar</button>
         </section>
       </section>
+
       <section>
         <table className="table table-hover">
           <thead>
@@ -96,6 +101,7 @@ export default function Appointments() {
               <th scope="col" className="col-buttons"></th>
             </tr>
           </thead>
+
           <tbody>
             {appointments.map((ap) => {
               return (

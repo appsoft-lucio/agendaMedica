@@ -1,16 +1,16 @@
 import lixeira from "../../assets/lixeira.png";
 import editar from "../../assets/editar.png";
 import "./appointments.css";
+
 export default function Appointment(props) {
   const dt = new Date(props.booking_date);
+
   return (
     <tr>
       <td scope="col">{props.user}</td>
       <td scope="col">{props.doctor}</td>
       <td scope="col">{props.service}</td>
-      <td scope="col">
-        {new Intl.DateTimeFormat("pt-BR", { dateStyle: "short" }).format(dt)}
-      </td>
+      <td scope="col"></td>
       <td className="text-end">
         {new Intl.NumberFormat("pt-BR", {
           style: "currency",

@@ -6,6 +6,7 @@ import logo from "../../assets/logo.png";
 import fundo from "../../assets/fundo.png";
 import olhoAberto from "../../assets/olhoAberto.png";
 import olhoFechado from "../../assets/olhoFechado.png";
+import api from "../../constants/api.js";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,18 +19,16 @@ export default function Login() {
     e.preventDefault();
     setalert("");
     try {
-      const response = await api.post("/users/login", { email, password });
+      const response = await api.post("/admin/login", { email, password });
 
       if (response.data) {
         localStorage.setItem("sessionToken", response.data.token);
-        localStorage.setItem("sessionId", response.data.id_user);
+        localStorage.setItem("sessionId", response.data.id_admin);
         localStorage.setItem("sessionEmail", response.data.email);
         localStorage.setItem("sessionName", response.data.name);
         api.defaults.headers.common["Authorization"] =
-          "Bearer" + response.data.token;
-        e.preventDefault();
-        const response = await api.get("/user/login", { email, password });
-
+          "Bearer " + response.data.token;
+        navigate("/appointments");
         try {
           if (response.data) {
             console.log(response.data);
@@ -40,8 +39,6 @@ export default function Login() {
           alert("Erro ao efetuar login. Tente novamente.");
           console.log(error);
         }
-
-        // navigate("/appointments");
       } else {
         setalert("Erro ao efeutar login. Tente novamente");
         console.log("Erro ao efeutar login. Tente novamente");
