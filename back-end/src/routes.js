@@ -3,6 +3,7 @@ import controllerDoctor from "./controllers/controller.doctor.js";
 import controllerUser from "./controllers/controller.user.js";
 import controllerAppointment from "./controllers/controller.appointment.js";
 import jwt from "./token.js";
+import controllerAdmin from "./controllers/controller.admin.js";
 
 const router = Router();
 
@@ -26,8 +27,8 @@ router.get(
 router.post("/users/register", controllerUser.Inserir);
 router.post("/users/login", controllerUser.Login);
 router.get("/users/profile", jwt.ValidateToken, controllerUser.Profile);
-router.post("/admin/register", controllerUser.InserirAdmin);
-router.post("/admin/login", controllerUser.LoginAdmin);
+router.post("/admin/register", controllerAdmin.InserirAdmin);
+router.post("/admin/login", controllerAdmin.LoginAdmin);
 
 // Reservas (Appointments)
 router.get(
