@@ -8,52 +8,37 @@ import api from "../../constants/api.js";
 
 export default function Appointments() {
   const navigate = useNavigate();
-  // const [appointments, setAppointments] = useState([]);
 
   function ClickEdit(id_appointment) {
     navigate("/appointments/edit/" + id_appointment);
-    console.log("Editar" + id_appointment);
   }
 
   function ClickDelete(id_appointment) {
     return console.log("Deletar" + id_appointment);
   }
 
-  // async function LoadAppointments() {
-  //   try {
-  //     const token = localStorage.getItem("sessionToken"); // Recupera o token do localStorage
+  async function LoadAppointments() {
+    try {
+      const response = await api.get("/appointments");
 
-  //     if (!token) {
-  //       alert("Você precisa estar logado para acessar esta página.");
-  //       navigate("/"); // Redireciona para o login
-  //       return;
-  //     }
+      if (response.data) {
+        console.log("Dados carregados:", response.data);
+      }
+    } catch (error) {
+      if (error.response?.data.error) {
+        alert(
+          error.response?.data.error + " Sessão expirada. Faça login novamente."
+        );
+      } else {
+        alert("Erro ao carregar agendamentos. Tente novamente.");
+      }
+      console.log(error);
+    }
+  }
 
-  //     const response = await api.get("/appointments", {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho
-  //       },
-  //     });
-
-  //     if (response.data) {
-  //       setAppointments(response.data);
-  //       console.log("Dados carregados:", response.data);
-  //     }
-  //   } catch (error) {
-  //     if (error.response?.status === 401) {
-  //       alert("Sessão expirada. Faça login novamente.");
-  //       localStorage.clear();
-  //       navigate("/"); // Redireciona para o login
-  //     } else {
-  //       alert("Erro ao carregar agendamentos. Tente novamente.");
-  //     }
-  //     console.log(error);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   LoadAppointments();
-  // }, []);
+  useEffect(() => {
+    LoadAppointments();
+  }, []);
 
   return (
     <section className="container-fluid mt-page">

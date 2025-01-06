@@ -1,10 +1,11 @@
 import jwt from "jsonwebtoken";
 
-const secretToken = process.env.JWT_SECRET || "defaultSecret"; // Valor padrão em caso de ausência
+const secretToken = "jornadaJS123";
+// process.env.JWT_SECRET || "defaultSecret"; // Valor padrão em caso de ausência
 
 function CreateToken(id_user) {
   const token = jwt.sign({ id_user }, secretToken, {
-    expiresIn: "1d", // ou "2h" para duas horas
+    expiresIn: 9999999, // ou "2h" para duas horas
   });
 
   return token;

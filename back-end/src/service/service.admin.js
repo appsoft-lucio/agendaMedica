@@ -36,7 +36,7 @@ async function LoginAdmin(email, password) {
   if (!admin) return [];
 
   if (await bcrypt.compare(password, admin.password)) {
-    const token = jwt.CreateToken(admin.id_user);
+    const token = jwt.CreateToken(admin.id_admin);
     delete admin.password;
     admin.token = token;
     return admin;
