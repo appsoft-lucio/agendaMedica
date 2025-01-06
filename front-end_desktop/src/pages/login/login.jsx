@@ -13,22 +13,22 @@ export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [alert, setAlert] = useState("Olá");
+  const [alert, setAlert] = useState("");
 
-  async function ExecuteLogin(event) {
-    event.preventDefault();
+  async function ExecuteLogin(e) {
+    e.preventDefault();
     setAlert("");
 
     try {
-      console.log(email, password);
       const response = await api.post("/admin/login", { email, password });
 
       if (response.data) {
-        console.log(response.data);
         localStorage.setItem("sessionToken", response.data.token);
         localStorage.setItem("sessionId", response.data.id_admin);
         localStorage.setItem("sessionEmail", response.data.email);
         localStorage.setItem("sessionName", response.data.name);
+        api.defaults.headers.common["Authorization"] =
+          "Bearer " + response.data.token;
         navigate("/appointments");
       } else {
         console.log(response);

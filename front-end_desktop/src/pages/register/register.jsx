@@ -21,13 +21,11 @@ export default function Register() {
     setalert("");
 
     if (password.length < 5) {
-      setalert("A senha deve ter no mínimo 5 caracteres.");
-      return; // Interrompe a execução da função
+      return setalert("A senha deve ter no mínimo 5 caracteres.");
     }
 
     if (password != confirmPassword) {
-      setalert("As senhas não conferem. Digite novamente.");
-      return;
+      return setalert("As senhas não conferem. Digite novamente.");
     }
 
     try {
@@ -43,8 +41,7 @@ export default function Register() {
         localStorage.setItem("sessionEmail", email);
         localStorage.setItem("sessionName", name);
         api.defaults.headers.common["Authorization"] =
-          "Bearer" + response.data.token;
-        navigate("/appointments");
+          "Bearer " + response.data.token;
         navigate("/appointments");
       } else {
         setalert("Erro ao criar conta. Tente novamente mais tarde");
@@ -55,9 +52,7 @@ export default function Register() {
       } else {
         setalert("Erro ao criar conta. Tente novamente mais tarde");
       }
-      console.log(error);
     }
-    console.log(password, email);
   }
 
   return (
