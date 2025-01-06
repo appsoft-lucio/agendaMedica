@@ -7,11 +7,11 @@ import { useEffect, useState } from "react";
 import api from "../../constants/api.js";
 
 export default function Appointments() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const [appointments, setAppointments] = useState([]);
 
   function ClickEdit(id_appointment) {
-    // navigate("/appointments/edit/" + id_appointment);
+    navigate("/appointments/edit/" + id_appointment);
     console.log("Editar" + id_appointment);
   }
 

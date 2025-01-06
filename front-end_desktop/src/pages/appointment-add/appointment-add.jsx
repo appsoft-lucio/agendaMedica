@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 
 export default function AppointmentAdd() {
   const { id_appointment } = useParams();
+
   return (
     <>
       <NavBar />

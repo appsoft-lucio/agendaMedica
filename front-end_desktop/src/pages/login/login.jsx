@@ -11,11 +11,33 @@ import api from "../../constants/api.js";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const [alert, setalert] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [alert, setAlert] = useState("Olá");
 
-  async function ExecuteLogin() {
-    setalert("");
-    navigate("/appointments");
+  async function ExecuteLogin(event) {
+    event.preventDefault();
+    setAlert("");
+
+    try {
+      console.log(email, password);
+      const response = await api.post("/admin/login", { email, password });
+
+      if (response.data) {
+        console.log(response.data);
+        localStorage.setItem("sessionToken", response.data.token);
+        localStorage.setItem("sessionId", response.data.id_admin);
+        localStorage.setItem("sessionEmail", response.data.email);
+        localStorage.setItem("sessionName", response.data.name);
+        navigate("/appointments");
+      } else {
+        console.log(response);
+        setAlert("Erro ao efetutar login. Tente novamente.");
+      }
+    } catch (error) {
+      setAlert("Erro a efetuar o login. Tente novamente");
+      console.log(error);
+    }
   }
   return (
     <div className="row login-container">
@@ -54,11 +76,11 @@ export default function Login() {
               Acessar
             </button>
           </div>
-          {alert.length > 0 ? (
+          {alert.length > 0 && (
             <div className="alert alert-danger" role="alert">
               {alert}
             </div>
-          ) : null}
+          )}
           <div className="mt-5 mb-3">
             <span>Não tenho conta. </span>
             <Link to="/register">Criar conta.</Link>

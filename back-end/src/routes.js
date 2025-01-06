@@ -27,6 +27,8 @@ router.get(
 router.post("/users/register", controllerUser.Inserir);
 router.post("/users/login", controllerUser.Login);
 router.get("/users/profile", jwt.ValidateToken, controllerUser.Profile);
+
+//Admin
 router.post("/admin/register", controllerAdmin.InserirAdmin);
 router.post("/admin/login", controllerAdmin.LoginAdmin);
 
