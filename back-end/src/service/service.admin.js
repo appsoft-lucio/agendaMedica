@@ -25,8 +25,8 @@ async function InserirAdmin(name, email, password) {
   // Insere o usuário no repositório
   const admin = await repositoryAdmin.InserirAdmin(name, email, hashPassword);
 
-  console.log("ID do adminstrador para criar token:", admin.id_user);
-  admin.token = jwt.CreateToken(admin.id_user);
+  console.log("ID do adminstrador para criar token:", admin.id_admin);
+  admin.token = jwt.CreateToken(admin.id_admin);
 
   return admin;
 }
