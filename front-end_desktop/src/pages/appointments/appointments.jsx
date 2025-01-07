@@ -52,14 +52,15 @@ export default function Appointments() {
       });
 
       if (response.data) {
-        console.log("Dados carregados:", response.data);
         setAppointments(response.data);
       }
     } catch (error) {
       if (error.response?.data.error) {
-        alert(
-          error.response?.data.error + " Sessão expirada. Faça login novamente."
-        );
+        if (error.response.status === 401) {
+          return navigate("/");
+        }
+
+        alert(error.response?.data.error);
       } else {
         alert("Erro ao carregar agendamentos. Tente novamente.");
       }
