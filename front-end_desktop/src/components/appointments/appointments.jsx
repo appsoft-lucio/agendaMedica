@@ -3,13 +3,7 @@ import editar from "../../assets/editar.png";
 import "./appointments.css";
 
 export default function Appointment(props) {
-  const formattedDate = new Date(props.booking_date);
-
-  const formattedBookingDate = new Intl.DateTimeFormat("pt-BR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(formattedDate);
+  const dt = new Date(props.booking_date + "T" + props.booking_hour);
 
   return (
     <tr>
@@ -17,7 +11,7 @@ export default function Appointment(props) {
       <td scope="col">{props.doctor}</td>
       <td scope="col">{props.service}</td>
       <td scope="col">
-        {formattedBookingDate} {props.booking_hour}
+        {new Intl.DateTimeFormat("pt-BR", { dateStyle: "short" }).format(dt)}
       </td>
       <td className="text-end">
         {new Intl.NumberFormat("pt-BR", {

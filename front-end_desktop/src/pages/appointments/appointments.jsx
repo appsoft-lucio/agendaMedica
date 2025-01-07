@@ -9,7 +9,10 @@ export default function Appointments() {
   const navigate = useNavigate();
   const [appointments, setAppointments] = useState([]);
   const [doctors, setDoctors] = useState([]);
+
   const [IdDoctors, setIdDoctors] = useState("");
+  const [dtStart, setDtStart] = useState("");
+  const [dtEnd, setDtEnd] = useState("");
 
   function ClickEdit(id_appointment) {
     navigate("/appointments/edit/" + id_appointment);
@@ -43,6 +46,8 @@ export default function Appointments() {
       const response = await api.get("/admin/appointments", {
         params: {
           id_doctor: IdDoctors,
+          dt_start: dtStart,
+          dt_end: dtEnd,
         },
       });
 
@@ -82,9 +87,23 @@ export default function Appointments() {
           </Link>
         </section>
         <section className="d-flex justify-content-end">
-          <input id="starDate" className="form-control" type="date" />
+          <input
+            id="starDate"
+            className="form-control"
+            type="date"
+            onChange={(e) => {
+              setDtStart(e.target.value);
+            }}
+          />
           <span className="m-2">Até</span>
-          <input id="endDate" className="form-control" type="date" />
+          <input
+            id="endDate"
+            className="form-control"
+            type="date"
+            onChange={(e) => {
+              setDtEnd(e.target.value);
+            }}
+          />
           <section className="form-control ms-2 me-2">
             <select
               id="doctor"
