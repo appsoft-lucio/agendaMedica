@@ -31,6 +31,11 @@ router.get("/users/profile", jwt.ValidateToken, controllerUser.Profile);
 //Admin
 router.post("/admin/register", controllerAdmin.InserirAdmin);
 router.post("/admin/login", controllerAdmin.LoginAdmin);
+router.get(
+  "/admin/appointments",
+  jwt.ValidateToken,
+  controllerAppointment.Listar
+);
 
 // Reservas (Appointments)
 router.get(

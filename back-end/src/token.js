@@ -39,4 +39,31 @@ function ValidateToken(req, res, next) {
   });
 }
 
+// function ValidateToken(req, res, next) {
+//   const authToken = req.headers.authorization;
+
+//   if (!authToken || typeof authToken !== "string") {
+//     return res.status(401).json({ error: "Token não informado ou inválido" });
+//   }
+
+//   const [bearer, token] = authToken.split(" ");
+//   if (bearer !== "Bearer" || !token) {
+//     return res.status(401).json({ error: "Token mal formatado" });
+//   }
+
+//   jwt.verify(
+//     token,
+//     process.env.JWT_SECRET || "defaultSecret",
+//     (err, decoded) => {
+//       if (err) {
+//         return res.status(401).json({ error: "Token inválido ou expirado" });
+//       }
+
+//       req.id_user = decoded.id_user; // ID do usuário
+//       req.is_admin = decoded.is_admin; // Nível de permissão (admin ou não)
+//       next();
+//     }
+//   );
+// }
+
 export default { CreateToken, ValidateToken };

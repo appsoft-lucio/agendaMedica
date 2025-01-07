@@ -1,13 +1,15 @@
 import "./appointments.style.css";
 import NavBar from "../../components/navBar/navBar";
 import { Link, useNavigate } from "react-router-dom";
-import { doctors, appointments } from "../../constants/data.js";
 import Appointment from "../../components/appointments/appointments.jsx";
 import { useEffect, useState } from "react";
 import api from "../../constants/api.js";
 
 export default function Appointments() {
   const navigate = useNavigate();
+  const [appointments, setAppointments] = useState([]);
+  const [doctors, setDoctors] = useState([]);
+  const [IdDoctors, setIdDoctors] = useState("");
 
   function ClickEdit(id_appointment) {
     navigate("/appointments/edit/" + id_appointment);
@@ -17,12 +19,12 @@ export default function Appointments() {
     return console.log("Deletar" + id_appointment);
   }
 
-  async function LoadAppointments() {
+  async function LoadDoctors() {
     try {
-      const response = await api.get("/appointments");
+      const response = await api.get("/doctors");
 
       if (response.data) {
-        console.log("Dados carregados:", response.data);
+        setDoctors(response.data);
       }
     } catch (error) {
       if (error.response?.data.error) {
@@ -36,7 +38,36 @@ export default function Appointments() {
     }
   }
 
+  async function LoadAppointments() {
+    try {
+      const response = await api.get("/admin/appointments", {
+        params: {
+          id_doctor: IdDoctors,
+        },
+      });
+
+      if (response.data) {
+        console.log("Dados carregados:", response.data);
+        setAppointments(response.data);
+      }
+    } catch (error) {
+      if (error.response?.data.error) {
+        alert(
+          error.response?.data.error + " Sessão expirada. Faça login novamente."
+        );
+      } else {
+        alert("Erro ao carregar agendamentos. Tente novamente.");
+      }
+      console.log(error);
+    }
+  }
+
+  function ChangeDoctor(e) {
+    setIdDoctors(e.target.value);
+  }
+
   useEffect(() => {
+    LoadDoctors();
     LoadAppointments();
   }, []);
 
@@ -55,7 +86,12 @@ export default function Appointments() {
           <span className="m-2">Até</span>
           <input id="endDate" className="form-control" type="date" />
           <section className="form-control ms-2 me-2">
-            <select id="doctor" name="doctor">
+            <select
+              id="doctor"
+              name="doctor"
+              value={IdDoctors}
+              onChange={ChangeDoctor}
+            >
               <option value="">Todos os médicos</option>
 
               {doctors.map((doc) => {
@@ -68,7 +104,13 @@ export default function Appointments() {
             </select>
           </section>
 
-          <button className="btn btn-custom">Filtar</button>
+          <button
+            onClick={LoadAppointments}
+            className="btn btn-custom"
+            type="button"
+          >
+            Filtar
+          </button>
         </section>
       </section>
 

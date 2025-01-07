@@ -1,26 +1,27 @@
 import repositoryAppointment from "../repository/repository.appointment.js";
 
-async function ListarByUser(id_user) {
-  try {
-    // Verifica se o id_user é válido
-    if (!id_user) {
-      throw new Error("ID de usuário não fornecido.");
-    }
+async function ListarByUser(id_user, dt_start, dt_end, id_doctor) {
+  // try {
+  // Verifica se o id_user é válido
+  // if (!id_user) {
+  //   throw new Error("ID de usuário não fornecido.");
+  // }
 
-    // Chama o repositório para buscar os agendamentos
-    const appointments = await repositoryAppointment.ListarByUser(id_user);
+  // Chama o repositório para buscar os agendamentos
+  const appointments = await repositoryAppointment.ListarByUser(
+    id_user,
+    dt_start,
+    dt_end,
+    id_doctor
+  );
 
-    // Verifica se não há agendamentos
-    if (appointments.length === 0) {
-      return { error: "Nenhum agendamento encontrado para este usuário." };
-    }
+  // Verifica se não há agendamentos
+  // if (appointments.length === 0) {
+  //   return { error: "Nenhum agendamento encontrado para este usuário." };
+  // }
 
-    // Retorna os agendamentos encontrados
-    return appointments;
-  } catch (error) {
-    // Retorna erro genérico se algo falhar
-    return { error: error.message || "Erro ao listar agendamentos." };
-  }
+  // Retorna os agendamentos encontrados
+  return appointments;
 }
 
 async function Inserir(

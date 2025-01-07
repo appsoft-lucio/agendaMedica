@@ -12,7 +12,12 @@ async function ListarByUser(req, res) {
     }
 
     // Chama o serviço para listar os agendamentos do usuário
-    const appointments = await serviceAppointment.ListarByUser(id_user);
+    const appointments = await serviceAppointment.ListarByUser(
+      id_user,
+      "",
+      "",
+      ""
+    );
 
     // Se não houver registros, retorna um erro 404
     if (appointments.length === 0) {
@@ -30,6 +35,22 @@ async function ListarByUser(req, res) {
       error: "Erro ao listar agendamentos, por favor tente novamente.",
     });
   }
+}
+async function Listar(req, res) {
+  // const id_user = req.query.id_user;
+  const dt_start = req.query.dt_start;
+  const dt_end = req.query.dt_end;
+  const id_doctor = req.query.id_doctor;
+
+  const appointments = await serviceAppointment.ListarByUser(
+    // id_user,
+    0,
+    dt_start,
+    dt_end,
+    id_doctor
+  );
+
+  res.status(200).json(appointments);
 }
 
 async function Inserir(req, res) {
@@ -58,4 +79,4 @@ async function Excluir(req, res) {
   return res.status(200).json(appointment);
 }
 
-export default { ListarByUser, Inserir, Excluir };
+export default { ListarByUser, Listar, Inserir, Excluir };

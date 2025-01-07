@@ -11,8 +11,8 @@ import api from "../../constants/api.js";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("lucioadmin@teste.com");
+  const [password, setPassword] = useState("12345");
   const [alert, setAlert] = useState("");
 
   async function ExecuteLogin(e) {
