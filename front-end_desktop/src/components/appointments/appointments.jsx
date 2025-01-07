@@ -3,6 +3,7 @@ import editar from "../../assets/editar.png";
 import "./appointments.css";
 
 export default function Appointment(props) {
+  //2025-01-07 + "T"  + 08:30:00
   const dt = new Date(props.booking_date + "T" + props.booking_hour);
 
   return (

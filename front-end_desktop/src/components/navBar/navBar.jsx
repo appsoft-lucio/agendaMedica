@@ -1,8 +1,22 @@
 import "./navBar.style.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logoBranco from "../../assets/logoBranco.png";
+import api from "../../constants/api.js";
 
 export default function NavBar() {
+  const navigate = useNavigate();
+
+  function Logout() {
+    localStorage.removeItem("sessionToken");
+    localStorage.removeItem("sessionId");
+    localStorage.removeItem("sessionEmail");
+    localStorage.removeItem("sessionName");
+
+    api.defaults.headers.common["Authorization"] = "";
+
+    navigate("/");
+  }
+
   return (
     <nav className="navbar fixed-top navbar-expand-lg bg-body-tertiary navBarColor">
       <div className="container-fluid">
@@ -42,7 +56,7 @@ export default function NavBar() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Lúcio Júnior
+                  {localStorage.getItem("sessionName")}
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
@@ -54,9 +68,13 @@ export default function NavBar() {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/">
+                    <button
+                      className="dropdown-item"
+                      type="button"
+                      onClick={Logout}
+                    >
                       Sair
-                    </Link>
+                    </button>
                   </li>
                 </ul>
               </div>
