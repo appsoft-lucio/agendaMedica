@@ -36,6 +36,7 @@ router.get(
   jwt.ValidateToken,
   controllerAppointment.Listar
 );
+router.get("/admin/users", jwt.ValidateToken, controllerAdmin.ListarUsers);
 
 // Reservas (Appointments)
 router.get(

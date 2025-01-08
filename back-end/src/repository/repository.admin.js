@@ -16,5 +16,11 @@ async function ListarByEmailAdmin(email) {
 
   return admin[0] || null; // Retorna o usuário ou null se não encontrado
 }
+async function ListarUsers(email) {
+  const sqlSelect = `SELECT id_user, name, email  FROM users ORDER BY name`;
+  const users = await query(sqlSelect, []);
 
-export default { ListarByEmailAdmin, InserirAdmin };
+  return users;
+}
+
+export default { ListarByEmailAdmin, InserirAdmin, ListarUsers };

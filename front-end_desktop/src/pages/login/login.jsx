@@ -56,6 +56,7 @@ export default function Login() {
               placeholder="E-mail"
               onChange={(e) => setEmail(e.target.value)}
               autoComplete="username"
+              value={"lucioadmin@teste.com"}
             />
           </div>
           <div className="mt-3 ">
@@ -64,6 +65,7 @@ export default function Login() {
               placeholder="Senha"
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
+              value={"12345"}
             />
             <img
               src={showPassword ? olhoAberto : olhoFechado}

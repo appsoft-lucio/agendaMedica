@@ -45,4 +45,10 @@ async function LoginAdmin(email, password) {
   }
 }
 
-export default { InserirAdmin, LoginAdmin };
+async function ListarUsers(email, password) {
+  const users = await repositoryAdmin.ListarUsers();
+
+  return users;
+}
+
+export default { InserirAdmin, LoginAdmin, ListarUsers };

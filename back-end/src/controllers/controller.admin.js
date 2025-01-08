@@ -11,7 +11,6 @@ async function InserirAdmin(req, res) {
     return res.status(400).json({ error: error.message });
   }
 }
-
 async function LoginAdmin(req, res) {
   const { email, password } = req.body;
 
@@ -21,4 +20,13 @@ async function LoginAdmin(req, res) {
   else res.status(200).json(admin);
 }
 
-export default { InserirAdmin, LoginAdmin };
+async function ListarUsers(req, res) {
+  try {
+    const users = await serviceAdmin.ListarUsers();
+    return res.status(200).json(users);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
+
+export default { InserirAdmin, LoginAdmin, ListarUsers };
