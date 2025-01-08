@@ -37,6 +37,11 @@ router.get(
   controllerAppointment.Listar
 );
 router.get("/admin/users", jwt.ValidateToken, controllerAdmin.ListarUsers);
+router.get(
+  "/admin/appointments/:id_appointment",
+  jwt.ValidateToken,
+  controllerAppointment.ListarId
+);
 
 // Reservas (Appointments)
 router.get(

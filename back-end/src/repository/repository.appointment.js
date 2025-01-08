@@ -2,7 +2,7 @@ import { application } from "express";
 import { query } from "../database/sqlite.js";
 
 async function ListarByUser(id_user, dt_start, dt_end, id_doctor) {
-  const filtro = []; // Lista de parâmetros
+  const filtro = [];
 
   let sql = `SELECT
     a.id_appointment,
@@ -12,7 +12,9 @@ async function ListarByUser(id_user, dt_start, dt_end, id_doctor) {
     a.booking_date,
     a.booking_hour,
     u.name AS user,
-    ds.price
+    ds.price,
+    a.id_doctor,
+    a.id_service
   FROM appointments a
   JOIN services s ON s.id_service = a.id_service
   JOIN doctors d ON d.id_doctor = a.id_doctor
@@ -39,79 +41,36 @@ async function ListarByUser(id_user, dt_start, dt_end, id_doctor) {
 
   sql += "ORDER BY a.booking_date, a.booking_hour";
 
-  // try {
-  // Executa a consulta no banco de dados
   const appointments = await query(sql, filtro);
 
-  // Verifica se nenhum resultado foi encontrado
-  // if (!appointments || appointments.length === 0) {
-  // return { error: "Nenhum agendamento encontrado para este usuário." };
-  // }
-
-  return appointments; // Retorna os agendamentos encontrados
-  // } catch (error) {
-  // console.error("Erro ao listar agendamentos:", error); // Log detalhado do erro
-  // return { error: "Erro ao listar agendamentos." }; // Retorna erro genérico
-  // }
+  return appointments;
 }
 
-// async function ListarByUser(id_user, dt_start, dt_end, id_doctor) {
-//   let sql = `
-//     SELECT
-//       a.id_appointment,
-//       s.description AS service,
-//       d.name AS doctor,
-//       d.specialty,
-//       a.booking_date,
-//       a.booking_hour,
-//       u.name AS user,
-//       ds.price
-//     FROM appointments a
-//     JOIN services s ON s.id_service = a.id_service
-//     JOIN doctors d ON d.id_doctor = a.id_doctor
-//     JOIN users u ON u.id_user = a.id_user
-//     LEFT JOIN doctors_services ds
-//       ON ds.id_doctor = a.id_doctor AND ds.id_service = a.id_service
-//     WHERE a.id_appointment > 0
-//   `;
+async function ListarId(id_appointment) {
+  let sql = `SELECT
+    a.id_appointment,
+    a.id_user,
+    u.name,
+    s.description AS service,
+    d.name AS doctor,
+    d.specialty,
+    a.booking_date,
+    a.booking_hour,
+    u.name AS user,
+    ds.price,
+    a.id_doctor,
+    a.id_service    
+  FROM appointments a
+  JOIN services s ON s.id_service = a.id_service
+  JOIN doctors d ON d.id_doctor = a.id_doctor
+  JOIN users u ON u.id_user = a.id_user
+  LEFT JOIN doctors_services ds ON ds.id_doctor = a.id_doctor AND ds.id_service = a.id_service
+  WHERE a.id_appointment = ? `;
 
-//   const filtro = [];
+  const appointments = await query(sql, [id_appointment]);
 
-//   if (id_user) {
-//     sql += " AND a.id_user = ? ";
-//     filtro.push(id_user);
-//   }
-
-//   if (id_doctor) {
-//     sql += " AND a.id_doctor = ? ";
-//     filtro.push(id_doctor);
-//   }
-
-//   if (dt_start) {
-//     sql += " AND a.booking_date >= ? ";
-//     filtro.push(dt_start);
-//   }
-
-//   if (dt_end) {
-//     sql += " AND a.booking_date <= ? ";
-//     filtro.push(dt_end);
-//   }
-
-//   sql += " ORDER BY a.booking_date, a.booking_hour";
-
-//   try {
-//     const appointments = await query(sql, filtro);
-
-//     if (!appointments || appointments.length === 0) {
-//       return [];
-//     }
-
-//     return appointments;
-//   } catch (error) {
-//     console.error("Erro ao listar agendamentos:", error);
-//     throw error;
-//   }
-// }
+  return appointments[0];
+}
 
 async function Inserir(
   id_user,
@@ -155,4 +114,4 @@ async function Excluir(id_user, id_appointment) {
   return { id_appointment };
 }
 
-export default { ListarByUser, Inserir, Excluir };
+export default { ListarByUser, Inserir, Excluir, ListarId };
