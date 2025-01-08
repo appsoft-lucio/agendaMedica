@@ -105,6 +105,31 @@ async function Inserir(
     throw new Error("Erro ao inserir agendamento no banco de dados.");
   }
 }
+async function Editar(
+  id_appointment,
+  id_user,
+  id_doctor,
+  id_service,
+  booking_date,
+  booking_hour
+) {
+  const sqlUpdate = `
+    UPDATE appointments set id_user=?, id_doctor=?, id_service=?, booking_date=?, booking_hour=? 
+    WHERE id_appointment = ? `;
+
+  await query(sqlUpdate, [
+    id_user,
+    id_doctor,
+    id_service,
+    booking_date,
+    booking_hour,
+    id_appointment,
+  ]);
+
+  const resAppointment = [id_appointment, id_user, id_service, id_doctor];
+
+  return { resAppointment };
+}
 
 async function Excluir(id_user, id_appointment) {
   const sqlDelete = `DELETE from appointments 
@@ -114,4 +139,4 @@ async function Excluir(id_user, id_appointment) {
   return { id_appointment };
 }
 
-export default { ListarByUser, Inserir, Excluir, ListarId };
+export default { ListarByUser, Inserir, Excluir, ListarId, Editar };

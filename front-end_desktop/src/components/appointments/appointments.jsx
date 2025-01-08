@@ -12,7 +12,8 @@ export default function Appointment(props) {
       <td scope="col">{props.doctor}</td>
       <td scope="col">{props.service}</td>
       <td scope="col">
-        {new Intl.DateTimeFormat("pt-BR", { dateStyle: "short" }).format(dt)}
+        {new Intl.DateTimeFormat("pt-BR", { dateStyle: "short" }).format(dt)} -{" "}
+        {props.booking_hour}h
       </td>
       <td className="text-end">
         {new Intl.NumberFormat("pt-BR", {

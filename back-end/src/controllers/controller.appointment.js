@@ -76,6 +76,40 @@ async function Inserir(req, res) {
   }
 }
 
+async function InserirAdmin(req, res) {
+  const { id_user, id_doctor, id_service, booking_date, booking_hour } =
+    req.body;
+  try {
+    const appointment = await serviceAppointment.Inserir(
+      id_user,
+      id_doctor,
+      id_service,
+      booking_date,
+      booking_hour
+    );
+    res.status(201).json(appointment);
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao inserir" });
+  }
+}
+
+async function EditarAdmin(req, res) {
+  const id_appointment = req.params.id_appointment;
+  const { id_user, id_doctor, id_service, booking_date, booking_hour } =
+    req.body;
+
+  const appointment = await serviceAppointment.Editar(
+    id_appointment,
+    id_user,
+    id_doctor,
+    id_service,
+    booking_date,
+    booking_hour
+  );
+
+  res.status(200).json(appointment);
+}
+
 async function Excluir(req, res) {
   const id_user = req.id_user;
   const id_appointment = req.params.id_appointment;
@@ -85,4 +119,12 @@ async function Excluir(req, res) {
   return res.status(200).json(appointment);
 }
 
-export default { ListarByUser, Listar, Inserir, Excluir, ListarId };
+export default {
+  ListarByUser,
+  Listar,
+  Inserir,
+  Excluir,
+  ListarId,
+  InserirAdmin,
+  EditarAdmin,
+};
