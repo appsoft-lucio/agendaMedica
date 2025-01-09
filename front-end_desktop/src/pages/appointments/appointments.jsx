@@ -37,9 +37,8 @@ export default function Appointments() {
 
         alert(error.response?.data.error);
       } else {
-        alert("Erro ao carregar agendamentos. Tente novamente.");
+        alert("Erro ao listar médicos. Tente novamente.");
       }
-      console.log(error);
     }
   }
 

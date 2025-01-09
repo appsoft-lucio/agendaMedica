@@ -43,7 +43,7 @@ router.get(
   controllerAppointment.ListarId
 );
 router.post(
-  "/admin/appointments/",
+  "/admin/appointments",
   jwt.ValidateToken,
   controllerAppointment.InserirAdmin
 );
