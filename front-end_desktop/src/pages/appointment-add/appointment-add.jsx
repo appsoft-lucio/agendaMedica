@@ -41,6 +41,10 @@ export default function AppointmentAdd() {
 
       if (response.data) {
         setDoctors(response.data);
+        if (id_appointment > 0) {
+          // Se for para editar
+          LoadAppointments(id_appointment);
+        }
       }
     } catch (error) {
       if (error.response?.data.error) {
@@ -55,6 +59,30 @@ export default function AppointmentAdd() {
     }
   }
 
+  async function LoadAppointments(id) {
+    try {
+      const response = await api.get("/admin/appointments/" + id);
+
+      if (response.data) {
+        setIdUser(response.data.id_user);
+        setIdDoctor(response.data.id_doctor);
+        setIdService(response.data.id_service);
+        setBookingDate(response.data.booking_date);
+        setBookingHour(response.data.booking_hour);
+      }
+    } catch (error) {
+      if (error.response?.data.error) {
+        if (error.response.status === 401) {
+          return navigate("/");
+        }
+
+        alert(error.response?.data.error);
+      } else {
+        alert("Erro ao listar serviços.");
+      }
+    }
+  }
+
   async function AgendarAppointment() {
     const json = {
       id_user: idUser,
@@ -64,7 +92,10 @@ export default function AppointmentAdd() {
       booking_hour: bookingHour,
     };
     try {
-      const response = await api.post("/admin/appointments", json);
+      const response =
+        id_appointment > 0
+          ? await api.put("/admin/appointments/" + id_appointment, json)
+          : await api.post("/admin/appointments", json);
 
       if (response.data) {
         navigate("/appointments");
@@ -89,7 +120,6 @@ export default function AppointmentAdd() {
       const response = await api.get("/doctors/" + id + "/services");
 
       if (response.data) {
-        console.log(response.data);
         setServices(response.data);
       }
     } catch (error) {
@@ -132,6 +162,7 @@ export default function AppointmentAdd() {
               <select
                 name="User"
                 id="doctor"
+                value={idUser}
                 onChange={(e) => setIdUser(e.target.value)}
               >
                 <option value="0">Selecione um paciente</option>
@@ -153,6 +184,7 @@ export default function AppointmentAdd() {
               <select
                 name="doctor"
                 id="doctor"
+                value={idDoctor}
                 onChange={(e) => setIdDoctor(e.target.value)}
               >
                 <option value="0">Selecione um médico</option>
@@ -202,7 +234,7 @@ export default function AppointmentAdd() {
             />
           </section>
           <section className="col-6 mt-3">
-            <label htmlFor="bookingDate" className="form-label">
+            <label htmlFor="bookingHour" className="form-label">
               Horário
             </label>
             <div className="form-control mb-2">
@@ -213,6 +245,7 @@ export default function AppointmentAdd() {
                 onChange={(e) => setBookingHour(e.target.value)}
               >
                 <option value="0">Horário</option>
+                <option value="07:00">07:00</option>
                 <option value="09:00">09:00</option>
                 <option value="09:30">09:30</option>
                 <option value="10:00">10:00</option>

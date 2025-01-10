@@ -23,7 +23,6 @@ export default function Login() {
       const response = await api.post("/admin/login", { email, password });
 
       if (response.data) {
-        console.log(response.data + "Promeiro console"); // Exibe os dados no console para depuração
         localStorage.setItem("sessionToken", response.data.token);
         localStorage.setItem("sessionId", response.data.id_admin);
         localStorage.setItem("sessionEmail", response.data.email);
@@ -31,14 +30,11 @@ export default function Login() {
         api.defaults.headers.common["Authorization"] =
           "Bearer " + response.data.token;
         navigate("/appointments");
-        console.log(response.data); // Exibe os dados no console para depuração
       } else {
-        console.log(response);
         setAlert("Erro ao efetutar login. Tente novamente.");
       }
     } catch (error) {
       setAlert("Erro a efetuar o login. Tente novamente");
-      console.log(error);
     }
   }
   return (
