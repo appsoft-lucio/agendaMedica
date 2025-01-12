@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Appointment from "../../components/appointments/appointments.jsx";
 import { useEffect, useState } from "react";
 import api from "../../constants/api.js";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css"; // Importar css
 
 export default function Appointments() {
   const navigate = useNavigate();
@@ -19,7 +21,48 @@ export default function Appointments() {
   }
 
   function ClickDelete(id_appointment) {
-    return console.log("Deletar" + id_appointment);
+    confirmAlert({
+      customUI: ({ onClose }) => (
+        <div className="custom-alert">
+          <h2>Excluir</h2>
+          <p>Tem certeza que deseja excluir este agendamento?</p>
+          <div>
+            <button
+              onClick={() => {
+                ExcluirAppointment(id_appointment);
+                onClose();
+              }}
+              className="btn btn-confirm"
+            >
+              Sim
+            </button>
+            <button onClick={onClose} className="btn btn-cancel">
+              Não
+            </button>
+          </div>
+        </div>
+      ),
+    });
+  }
+
+  async function ExcluirAppointment(id) {
+    try {
+      const response = await api.delete("/appointments/" + id);
+
+      if (response.data) {
+        LoadAppointments();
+      }
+    } catch (error) {
+      if (error.response?.data.error) {
+        if (error.response.status === 401) {
+          return navigate("/");
+        }
+
+        alert(error.response?.data.error);
+      } else {
+        alert("Erro ao excluir.");
+      }
+    }
   }
 
   async function LoadDoctors() {

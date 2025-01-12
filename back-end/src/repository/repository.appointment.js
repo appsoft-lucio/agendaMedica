@@ -133,9 +133,9 @@ async function Editar(
 
 async function Excluir(id_user, id_appointment) {
   const sqlDelete = `DELETE from appointments 
-    WHERE id_appointment = ? AND id_user = ?`;
+    WHERE id_appointment = ?`;
 
-  await query(sqlDelete, [id_appointment, id_user]);
+  await query(sqlDelete, [id_appointment]);
   return { id_appointment };
 }
 
