@@ -4,6 +4,7 @@ import Login from "./pages/login/login.jsx";
 import Register from "./pages/register/register.jsx";
 import Appointments from "./pages/appointments/appointments.jsx";
 import AppointmentAdd from "./pages/appointment-add/appointment-add.jsx";
+import Doctor from "./pages/doctor/doctor.jsx";
 
 export default function Rotas() {
   return (
@@ -17,6 +18,7 @@ export default function Rotas() {
           path="/appointments/edit/:id_appointment"
           element={<AppointmentAdd />}
         />
+        <Route path="/doctor" element={<Doctor />} />
       </Routes>
     </BrowserRouter>
   );

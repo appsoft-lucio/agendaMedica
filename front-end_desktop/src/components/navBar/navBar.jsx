@@ -42,7 +42,7 @@ export default function NavBar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link active" to="/doctos">
+              <Link className="nav-link active" to="/doctor">
                 Médicos
               </Link>
             </li>

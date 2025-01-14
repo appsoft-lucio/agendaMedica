@@ -27,14 +27,14 @@ export default function Appointment(props) {
             onClick={() => props.clickEdit(props.id_appointment)}
             className="btn btn-sm "
           >
-            <img src={editar} alt="" />
+            <img src={editar} alt="Editar" />
           </button>
 
           <button
             onClick={() => props.clickDelete(props.id_appointment)}
             className="btn btn-sm "
           >
-            <img src={lixeira} alt="" />
+            <img src={lixeira} alt="Excluir" />
           </button>
         </div>
       </td>

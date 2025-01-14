@@ -1,0 +1,29 @@
+img {
+  width: 20px;
+}
+.edit-delete {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+/* .mt-page {
+  margin-top: 20px;
+} */
+
+/* .btn-custom {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+} */
+
+/* .btn-custom:hover {
+  background-color: #0056b3;
+} */
+
+/* .table-hover tbody tr:hover {
+  background-color: #f8f9fa;
+} */

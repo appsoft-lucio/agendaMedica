@@ -124,7 +124,7 @@ export default function Appointments() {
   return (
     <section className="container-fluid mt-page">
       <NavBar />
-      <section className="d-flex justify-content-between align-items-center">
+      <section className="d-flex justify-content-between align-items-center mb-5">
         <section>
           <h3 className="d-inline">Agendamentos</h3>
           <Link to="/appointments/add" className="btn ms-5 mb-2  btn-custom">
