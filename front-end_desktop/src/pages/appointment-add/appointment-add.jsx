@@ -145,7 +145,7 @@ export default function AppointmentAdd() {
   }, [idDoctor]);
 
   return (
-    <>
+    <section>
       <NavBar />
       <section className="container-fluid mt-page ">
         <section className="row col-lg-4 offset-lg-4">
@@ -270,6 +270,6 @@ export default function AppointmentAdd() {
           </section>
         </section>
       </section>
-    </>
+    </section>
   );
 }

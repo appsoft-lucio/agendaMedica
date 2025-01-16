@@ -5,6 +5,7 @@ import Register from "./pages/register/register.jsx";
 import Appointments from "./pages/appointments/appointments.jsx";
 import AppointmentAdd from "./pages/appointment-add/appointment-add.jsx";
 import Doctor from "./pages/doctor/doctor.jsx";
+import DoctorAdd from "./pages/doctor-add/doctor-add.jsx";
 
 export default function Rotas() {
   return (
@@ -19,6 +20,7 @@ export default function Rotas() {
           element={<AppointmentAdd />}
         />
         <Route path="/doctor" element={<Doctor />} />
+        <Route path="/doctor/add" element={<DoctorAdd />} />
       </Routes>
     </BrowserRouter>
   );

@@ -49,7 +49,7 @@ export default function Doctors() {
         </section>
         <section className="d-flex ">
           <Link
-            to="#"
+            to="/doctor/add"
             className="btn ms-5 mb-2  btn-custom text-nowrap novo-medico"
           >
             Novo Médico
