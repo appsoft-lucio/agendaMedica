@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://10.0.0.100:3001",
+  baseURL: "https://back-end-autumn-sky-4114.fly.dev",
 });
 
 // api.interceptors.request.use(async (config) => {
